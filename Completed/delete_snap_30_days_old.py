@@ -9,10 +9,10 @@ current=int(current_epoch)
 
 one_month_epoch=2629743
 
-#one_day_epoch=86400
 snapshot_list = []
 deleted_snap_list = []
 error_list = []
+
 for snap in snapshot['Snapshots']:
 	id=snap['SnapshotId']
 	#print id
@@ -23,7 +23,7 @@ for snap in snapshot['Snapshots']:
 		count = count + 1
 		snapshot_list.append(snap['SnapshotId'])
 		continue
-#count = len(snapshot_list)
+
 for snap in snapshot_list:
 	try:
 		client.delete_snapshot(SnapshotId=snap)
@@ -32,8 +32,11 @@ for snap in snapshot_list:
 		error_list.append(str(e))
 	continue
 	
+#count number of deleted snapshots	
 count_a = len(deleted_snap_list)
+#count number of error occured
 count_error_list = len(error_list)
+
 mystring_1 = str(deleted_snap_list)
 mystring_1 = mystring_1.replace(",", "\n")	
 
@@ -42,7 +45,6 @@ if count_error_list != 0:
 
 a = "the count of deleted snapshots are: "+str(count_a)+"\n"
 b = "The deleted snapshots were :\n"+mystring_1+"\n"
-
 output = a+b+c
 
 #SNS to notify the result of Delete_snapshot call
