@@ -26,7 +26,7 @@ for snap in snapshot['Snapshots']:
 for snap in snapshot_list:
         try:
 #                client.describe_snapshots(SnapshotIds=[snap])
-                client.delete_snapshot(SnapshotId=snap)
+                client.delete_snapshot(SnapshotIds=snap)
                 deleted_snap_list.append(snap)
         except Exception,e:
                 error_list.append(str(e))
